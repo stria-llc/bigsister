@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "bigsister"
+require "bigsister/application"
+require "springcm-sdk"
+
+begin
+  application = BigSister::Application.new
+  application.run
+rescue BigSister::Error => e
+  puts "ERROR: #{e.message}"
+rescue Springcm::Error => e
+  puts e.inspect
+end

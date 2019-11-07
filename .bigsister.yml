@@ -1,0 +1,49 @@
+monitor:
+  - type: local
+    path: /Users/paul
+  - type: springcm
+    path: /Human Resources Records
+    credentials:
+      client_id: client_id
+      client_secret: client_secret
+      data_center: data_center
+generate:
+  - type: csv
+    path: ./detail.csv
+    format: detail
+    mode: write
+    include:
+      - directories
+      - files
+    columns:
+      - title: Timestamp
+        type: timestamp
+      - title: Path
+        type: path
+      - title: File Size
+        type: size
+      - title: File Type
+        type: type
+      - title: Created
+        type: created_at
+      - title: Modified
+        type: modified_at
+      - title: Customer
+        type: literal
+        value: KHSD
+  - type: csv
+    path: ./summary.csv
+    format: summary
+    mode: append
+    include:
+      - directories
+      - files
+    columns:
+      - title: Timestamp
+        type: timestamp
+      - title: File Count
+        type: file_count
+      - title: Directory Count
+        type: directory_count
+      - title: File Size
+        type: file_size
