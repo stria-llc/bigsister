@@ -1,5 +1,7 @@
 # BigSister
 
+[![Build Status](https://travis-ci.org/paulholden2/bigsister.svg?branch=master)](https://travis-ci.org/paulholden2/bigsister)
+
 A gem for generating reports on the contents of local and remote files for monitoring purposes. Above-board monitoring purposes.
 
 ## Installation
