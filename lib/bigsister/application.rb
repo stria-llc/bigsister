@@ -21,7 +21,7 @@ module BigSister
 
     def load_config!
       yaml = @config_paths.map { |path|
-        File.exist?(path) && YAML.load(File.open(path).read)
+        File.exists?(path) && YAML.load(File.open(path).read)
       }.select(&:itself).first
       if yaml.nil?
         raise BigSister::NoConfigurationFound.new(@config_paths)
