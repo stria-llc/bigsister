@@ -1,6 +1,6 @@
 # BigSister
 
-[![Build Status](https://travis-ci.org/paulholden2/bigsister.svg?branch=master)](https://travis-ci.org/paulholden2/bigsister) [![Maintainability](https://api.codeclimate.com/v1/badges/5c5e63e8a1c0f3830129/maintainability)](https://codeclimate.com/github/paulholden2/bigsister/maintainability)
+[![Build Status](https://travis-ci.org/paulholden2/bigsister.svg?branch=master)](https://travis-ci.org/paulholden2/bigsister) [![Maintainability](https://api.codeclimate.com/v1/badges/5c5e63e8a1c0f3830129/maintainability)](https://codeclimate.com/github/paulholden2/bigsister/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/5c5e63e8a1c0f3830129/test_coverage)](https://codeclimate.com/github/paulholden2/bigsister/test_coverage)
 
 A gem for generating reports on the contents of local and remote files for monitoring purposes. Above-board monitoring purposes.
 
