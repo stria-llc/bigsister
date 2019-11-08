@@ -32,20 +32,20 @@ module BigSister
         dirs = dirs + list.items
         list = list.next
       end
-      dirs
+      dirs.map(&:name)
     end
 
     private
 
     def validate_config!
       if @client_id.nil?
-        raise BigSister::InvalidSpringcmCredentials.new("SpringCM client_id required.")
+        raise BigSister::InvalidConfiguration.new("SpringCM client_id required.")
       end
       if @client_secret.nil?
-        raise BigSister::InvalidSpringcmCredentials.new("SpringCM client_secret is required.")
+        raise BigSister::InvalidConfiguration.new("SpringCM client_secret is required.")
       end
       if @client_secret.nil?
-        raise BigSister::InvalidSpringcmCredentials.new("SpringCM data_center is required.")
+        raise BigSister::InvalidConfiguration.new("SpringCM data_center is required.")
       end
       if @path.nil?
         raise BigSister::InvalidConfiguration.new("SpringCM path is required.")
