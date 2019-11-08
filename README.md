@@ -23,7 +23,7 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-$> bigsister
+$ bigsister
 ```
 
 ## Development
