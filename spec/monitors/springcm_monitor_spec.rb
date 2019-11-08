@@ -19,8 +19,25 @@ RSpec.describe BigSister::SpringcmMonitor do
   let(:monitor) { BigSister::SpringcmMonitor.new(config, id) }
   let(:files) { monitor.files }
   let(:directories) { monitor.directories }
-  let(:fake_folders) { [instance_double(Springcm::Folder)] * 10 }
-  let(:fake_files) { [instance_double(Springcm::Document)] * 10 }
+
+  class Springcm::FakeFolder < Springcm::Folder
+    def name; super end
+  end
+
+  class Springcm::FakeDocument < Springcm::Document
+    def name; super end
+  end
+
+  let(:fake_folders) {
+    folder = instance_double(Springcm::FakeFolder)
+    allow(folder).to receive(:name).and_return("Folder Name")
+    [folder] * 10
+  }
+  let(:fake_files) {
+    document = instance_double(Springcm::FakeDocument)
+    allow(document).to receive(:name).and_return("Document Name.pdf")
+    [document] * 10
+  }
 
   def stub_client
     client = instance_double(Springcm::Client)
@@ -34,6 +51,7 @@ RSpec.describe BigSister::SpringcmMonitor do
     allow(folder).to receive(:folders).and_return(folder_list)
     allow(folder_list).to receive(:items).and_return(folders)
     allow(folder_list).to receive(:next).and_return(nil)
+    allow_any_instance_of(Springcm::FakeFolder).to receive(:name).and_return("Folder Name")
     return folder_list
   end
 
@@ -42,11 +60,12 @@ RSpec.describe BigSister::SpringcmMonitor do
     allow(folder).to receive(:documents).and_return(document_list)
     allow(document_list).to receive(:items).and_return(documents)
     allow(document_list).to receive(:next).and_return(nil)
+    allow_any_instance_of(Springcm::FakeDocument).to receive(:name).and_return("Document Name.pdf")
     return document_list
   end
 
   def stub_monitored_folder(client)
-    folder = instance_double(Springcm::Folder)
+    folder = instance_double(Springcm::FakeFolder)
     allow(client).to receive(:folder).with(path: path).and_return(folder)
     return folder
   end
@@ -65,11 +84,11 @@ RSpec.describe BigSister::SpringcmMonitor do
 
   it "lists directories" do
     stub_folders(path, fake_folders)
-    expect(directories).to all(be_a(instance_double(Springcm::Folder).class))
+    expect(directories).to all(be_a(String))
   end
 
   it "lists files" do
     stub_files(path, fake_files)
-    expect(files).to all(be_a(instance_double(Springcm::Document).class))
+    expect(files).to all(be_a(String))
   end
 end
