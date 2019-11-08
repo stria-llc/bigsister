@@ -22,7 +22,7 @@ module BigSister
         docs = docs + list.items
         list = list.next
       end
-      docs
+      docs.map(&:name)
     end
 
     def directories
