@@ -11,13 +11,13 @@ module BigSister
 
     def files
       Dir.entries(@path).reject { |file|
-        File.directory?(file)
+        File.directory?(File.join(@path, file))
       }
     end
 
     def directories
       Dir.entries(@path).select { |file|
-        File.directory?(file)
+        File.directory?(File.join(@path, file))
       }
     end
   end

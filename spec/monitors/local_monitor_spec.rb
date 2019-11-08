@@ -15,13 +15,13 @@ RSpec.describe BigSister::LocalMonitor do
 
   def stub_directories(path, directories)
     directories.each { |directory|
-      allow(File).to receive(:directory?).with(directory).and_return(true)
+      allow(File).to receive(:directory?).with(File.join(path, directory)).and_return(true)
     }
   end
 
   def stub_files(path, files)
     files.each { |file|
-      allow(File).to receive(:directory?).with(file).and_return(false)
+      allow(File).to receive(:directory?).with(File.join(path, file)).and_return(false)
     }
   end
 
