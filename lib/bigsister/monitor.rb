@@ -10,5 +10,11 @@ module BigSister
 
     def detail
     end
+
+    def files
+    end
+
+    def directories
+    end
   end
 end
