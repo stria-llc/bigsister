@@ -20,4 +20,7 @@ module BigSister
       super("No configuration files found. Looked in: #{checked_paths.join(', ')}")
     end
   end
+
+  class InvalidConfiguration < Error
+  end
 end
