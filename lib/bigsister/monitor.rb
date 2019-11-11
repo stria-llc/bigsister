@@ -5,12 +5,6 @@ module BigSister
       @id = id
     end
 
-    def summary
-    end
-
-    def detail
-    end
-
     def files
     end
 
