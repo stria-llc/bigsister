@@ -1,5 +1,7 @@
 require "springcm-sdk"
 require "bigsister/monitors/springcm"
+require "bigsister/file_info"
+require "bigsister/directory_info"
 
 RSpec.describe BigSister::SpringcmMonitor do
   let(:path) { "/Test Folder" }
@@ -26,16 +28,28 @@ RSpec.describe BigSister::SpringcmMonitor do
 
   class Springcm::FakeDocument < Springcm::Document
     def name; super end
+    def native_file_size; super end
+  end
+
+  class Springcm::FakeResourceList < Springcm::ResourceList
+    def total; super end
   end
 
   let(:fake_folders) {
     folder = instance_double(Springcm::FakeFolder)
+    document_list = instance_double(Springcm::FakeResourceList)
+    folder_list = instance_double(Springcm::FakeResourceList)
+    allow(document_list).to receive(:total).and_return(rand(1e5))
+    allow(folder_list).to receive(:total).and_return(rand(1e5))
     allow(folder).to receive(:name).and_return("Folder Name")
+    allow(folder).to receive(:documents).and_return(document_list)
+    allow(folder).to receive(:folders).and_return(folder_list)
     [folder] * 10
   }
   let(:fake_files) {
     document = instance_double(Springcm::FakeDocument)
     allow(document).to receive(:name).and_return("Document Name.pdf")
+    allow(document).to receive(:native_file_size).and_return(rand(1e8))
     [document] * 10
   }
 
@@ -47,7 +61,7 @@ RSpec.describe BigSister::SpringcmMonitor do
   end
 
   def stub_folder_list(folder, folders)
-    folder_list = instance_double(Springcm::ResourceList)
+    folder_list = instance_double(Springcm::FakeResourceList)
     allow(folder).to receive(:folders).and_return(folder_list)
     allow(folder_list).to receive(:items).and_return(folders)
     allow(folder_list).to receive(:next).and_return(nil)
@@ -84,11 +98,11 @@ RSpec.describe BigSister::SpringcmMonitor do
 
   it "lists directories" do
     stub_folders(path, fake_folders)
-    expect(directories).to all(be_a(String))
+    expect(directories).to all(be_a(BigSister::DirectoryInfo))
   end
 
   it "lists files" do
     stub_files(path, fake_files)
-    expect(files).to all(be_a(String))
+    expect(files).to all(be_a(BigSister::FileInfo))
   end
 end

@@ -4,11 +4,5 @@ module BigSister
       @location = location
       @id = id
     end
-
-    def files
-    end
-
-    def directories
-    end
   end
 end

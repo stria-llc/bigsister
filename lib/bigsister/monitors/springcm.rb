@@ -1,4 +1,6 @@
 require "bigsister/monitor"
+require "bigsister/file_info"
+require "bigsister/directory_info"
 require "springcm-sdk"
 
 module BigSister
@@ -22,7 +24,13 @@ module BigSister
         docs = docs + list.items
         list = list.next
       end
-      docs.map(&:name)
+      res = docs.map { |document|
+        FileInfo.new(
+          name: document.name,
+          file_size: document.native_file_size
+        )
+      }
+      res
     end
 
     def directories
@@ -32,7 +40,14 @@ module BigSister
         dirs = dirs + list.items
         list = list.next
       end
-      dirs.map(&:name)
+      res = dirs.map { |dir|
+        DirectoryInfo.new(
+          name: dir.name,
+          file_count: dir.documents.total,
+          directory_count: dir.folders.total
+        )
+      }
+      res
     end
 
     private
