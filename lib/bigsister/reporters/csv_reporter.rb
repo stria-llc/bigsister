@@ -33,11 +33,12 @@ module BigSister
     end
 
     def detail
-      ([headers] + super).join("\n")
+      rows = super.map { |row| row.to_csv(row_sep: nil) }
+      ([headers] + rows).join("\n")
     end
 
     def summary
-      [headers, super].join("\n")
+      [headers, super.to_csv(row_sep: nil)].join("\n")
     end
   end
 end
