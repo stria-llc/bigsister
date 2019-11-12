@@ -26,6 +26,22 @@ module BigSister
       @directories.push(path)
     end
 
+    def summary?
+      return @format == "summary"
+    end
+
+    def detail?
+      return !summary?
+    end
+
+    def log_files?
+      return @schema.fetch("include", []).include?("files")
+    end
+
+    def log_directories?
+      return @schema.fetch("include", []).include?("directories")
+    end
+
     protected
 
     def validate_column!(column)
@@ -41,22 +57,6 @@ module BigSister
         list = allowed_types.join(", ")
         raise BigSister::InvalidConfiguration.new("Column type for #{@format} must be one of: #{list}")
       end
-    end
-
-    def summary?
-      return @format == "summary"
-    end
-
-    def detail?
-      return !summary?
-    end
-
-    def log_files?
-      return @schema.fetch("include", {}).include?("files")
-    end
-
-    def log_directories?
-      return @schema.fetch("include", {}).include?("directories")
     end
 
     def transform_file(file, column)
