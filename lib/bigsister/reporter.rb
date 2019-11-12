@@ -110,5 +110,27 @@ module BigSister
     def current_timestamp
       DateTime.now.strftime("%FT%T%:z")
     end
+
+    def detail
+      rows = []
+      rows += file_rows if log_files?
+      rows += directory_rows if log_directories?
+      rows
+    end
+
+    def summary
+      file_count = file_rows.size
+      directory_count = directory_rows.size
+      @columns.map { |column|
+        type = column["type"]
+        if type == "timestamp"
+          current_timestamp
+        elsif type == "file_count"
+          file_count
+        elsif type == "directory_count"
+          directory_count
+        end
+      }
+    end
   end
 end

@@ -33,27 +33,11 @@ module BigSister
     end
 
     def detail
-      rows = file_rows + directory_rows
-      data = rows.reject(&:nil?).map { |row|
-        row.to_csv(row_sep: nil)
-      }
-      ([headers] + data).join("\n")
+      ([headers] + super).join("\n")
     end
 
     def summary
-      file_count = file_rows.size
-      directory_count = directory_rows.size
-      data = @columns.map { |column|
-        type = column["type"]
-        if type == "timestamp"
-          current_timestamp
-        elsif type == "file_count"
-          file_count
-        elsif type == "directory_count"
-          directory_count
-        end
-      }.to_csv(row_sep: nil)
-      [headers, data].join("\n")
+      [headers, super].join("\n")
     end
   end
 end
