@@ -46,12 +46,14 @@ RSpec.describe BigSister::Configuration do
     end
   end
 
-  context "invalid configuration" do
+  context "invalid monitor" do
     let(:yaml) {
       {
-        "stuff" => {
-          "things" => "mabobs"
-        }
+        "monitor" => [
+          {
+            "type" => "invalid"
+          }
+        ]
       }.to_yaml
     }
 
