@@ -70,7 +70,7 @@ module BigSister
       elsif type == "file_size"
         file.file_size
       elsif type == "literal"
-        @schema.fetch("value", nil)
+        column.fetch("value", nil)
       end
     end
 
@@ -87,7 +87,7 @@ module BigSister
       elsif type == "directory_count"
         directory.directory_count
       elsif type == "literal"
-        @schema.fetch("value", nil)
+        column.fetch("value", nil)
       end
     end
 
