@@ -22,9 +22,6 @@ module BigSister
 
     def load_monitoring(data)
       @monitoring = data.fetch("monitor", [])
-      if @monitoring.empty?
-        config_error("No monitoring locations configured")
-      end
       @monitoring.each_with_index { |location, i|
         # Validate monitoring type
         type = location.fetch("type", nil)
