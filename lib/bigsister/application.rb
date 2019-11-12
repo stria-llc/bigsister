@@ -15,6 +15,21 @@ module BigSister
     end
 
     def run
+      config.reporters.each { |reporter|
+        config.monitors.each { |monitor|
+          if reporter.log_files?
+            monitor.files.each { |file|
+              reporter.log_file(file)
+            }
+          end
+          if reporter.log_directories?
+            monitor.directories.each { |directory|
+              reporter.log_directory(directory)
+            }
+          end
+        }
+        reporter.render
+      }
     end
 
     private
