@@ -7,6 +7,7 @@ RSpec.describe BigSister::CsvReporter do
   let(:mode) { "write" }
   let(:columns) { nil }
   let(:path) { "/Users/rspec/out.csv" }
+  let(:include) { %w(files directories) }
   let(:schema) {
     {
       "type" => "csv",
