@@ -5,7 +5,8 @@ require "yaml"
 
 RSpec.describe BigSister::Configuration do
   let(:application) { BigSister::Application.new }
-  let(:config) { application.config }
+  let(:configs) { application.configs }
+  let(:config) { application.configs.first }
 
   def stub_existing_files(contents)
     paths = BigSister::Application::DEFAULT_CONFIG_PATHS
@@ -26,10 +27,14 @@ RSpec.describe BigSister::Configuration do
   context "local monitor configuration" do
     let(:yaml) {
       {
-        "monitor" => [
+        "sisters" => [
           {
-            "type" => "local",
-            "path" => "/Users/bigsister/local"
+            "monitor" => [
+              {
+                "type" => "local",
+                "path" => "/Users/bigsister/local"
+              }
+            ]
           }
         ]
       }.to_yaml
@@ -49,9 +54,13 @@ RSpec.describe BigSister::Configuration do
   context "invalid monitor" do
     let(:yaml) {
       {
-        "monitor" => [
+        "sisters" => [
           {
-            "type" => "invalid"
+            "monitor" => [
+              {
+                "type" => "invalid"
+              }
+            ]
           }
         ]
       }.to_yaml
@@ -59,7 +68,7 @@ RSpec.describe BigSister::Configuration do
 
     it "loads configuration" do
       stub_existing_files(yaml)
-      expect(config).to be_a(BigSister::Configuration)
+      expect(configs).to all(be_a(BigSister::Configuration))
     end
 
     it "configuration is invalid" do
