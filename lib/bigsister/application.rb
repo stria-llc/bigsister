@@ -4,7 +4,15 @@ require "bigsister/configuration"
 
 module BigSister
   class Application
-    DEFAULT_CONFIG_PATHS = ["./.bigsister.yml", "~/.bigsister/config.yml"].freeze
+    DEFAULT_CONFIG_PATHS = ["./.bigsister.yml"]
+
+    if OS.windows?
+      DEFAULT_CONFIG_PATHS.push("%USERPROFILE%/.bigsister/config.yml")
+    else
+      DEFAULT_CONFIG_PATHS.push("~/.bigsister/config.yml")
+    end
+
+    DEFAULT_CONFIG_PATHS.freeze
 
     attr_reader :config
 
