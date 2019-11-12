@@ -108,7 +108,7 @@ module BigSister
     end
 
     def current_timestamp
-      DateTime.now.strftime("%FT%T%:z")
+      DateTime.now.strftime("%FT%T%z")
     end
 
     def detail
