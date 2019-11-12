@@ -4,7 +4,11 @@ All notable changes to BigSister will be documented in this file.
 
 ## [Unreleased]
 
-## [0.2.0] - Nov 11, 2019
+## [0.2.1] - Nov 12, 2019
+### Added
+* Implemented literal column for summary reports
+
+## [0.2.0] - Nov 12, 2019
 ### Changed
 * Configs now stored as array of `sister`s
 * Fix literal column
@@ -25,3 +29,4 @@ All notable changes to BigSister will be documented in this file.
 [0.1.1]: https://github.com/paulholden2/bigsister/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/bigsister/releases/tag/0.1.2
 [0.2.0]: https://github.com/paulholden2/bigsister/releases/tag/0.2.0
+[0.2.1]: https://github.com/paulholden2/bigsister/releases/tag/0.2.1
