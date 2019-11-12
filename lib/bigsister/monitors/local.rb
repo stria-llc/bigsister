@@ -28,6 +28,8 @@ module BigSister
     def directories
       res = Dir.entries(@path).select { |file|
         File.directory?(File.join(@path, file))
+      }.reject { |dir|
+        dir == "." || dir == ".."
       }.map { |dir|
         dir_path = File.join(@path, dir)
         file_count = Dir.entries(dir_path).reject { |file| File.directory?(File.join(dir_path, file)) }.size

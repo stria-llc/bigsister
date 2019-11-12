@@ -14,9 +14,9 @@ RSpec.describe BigSister::LocalMonitor do
   let(:files) { monitor.files }
   let(:directories) { monitor.directories }
   let(:file_list) { ["File 1.pdf", "File 2.jpg", "File 3.png"] }
-  let(:directory_list) { ["Folder 1", "Folder 2", "Folder 3"] }
+  let(:directory_list) { [".", "..", "Folder 1", "Folder 2", "Folder 3"] }
   let(:sub_file_list) { ["Subfile 1.docx", "Subfile 2.tif"] }
-  let(:sub_directory_list) { ["Subfolder 1", "Subfolder 2"] }
+  let(:sub_directory_list) { [".", "..", "Subfolder 1", "Subfolder 2"] }
 
   def stub_directories(path, directories, sub_files, sub_directories)
     directories.each { |directory|
@@ -51,6 +51,12 @@ RSpec.describe BigSister::LocalMonitor do
     expect(directories).to all(be_a(BigSister::DirectoryInfo))
   end
 
+  it "does not list . and .. symlinks" do
+    stub_directories(path, directory_list, sub_file_list, sub_directory_list)
+    stub_entries(path, directory_list)
+    expect(directories.map(&:name)).not_to include(".", "..")
+  end
+
   it "detects list of files" do
     stub_files(path, file_list)
     stub_entries(path, file_list)
@@ -61,7 +67,7 @@ RSpec.describe BigSister::LocalMonitor do
     stub_files(path, file_list)
     stub_directories(path, directory_list, sub_file_list, sub_directory_list)
     stub_entries(path, file_list + directory_list)
-    expect(directories.size).to eq(directory_list.size)
+    expect(directories.map(&:name)).not_to include(*file_list)
   end
 
   it "lists only files" do
