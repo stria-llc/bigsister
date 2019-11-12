@@ -129,6 +129,8 @@ module BigSister
           file_count
         elsif type == "directory_count"
           directory_count
+        elsif type == "literal"
+          column.fetch("value", nil)
         end
       }
     end
