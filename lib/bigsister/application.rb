@@ -1,4 +1,3 @@
-require "os"
 require "yaml"
 require "bigsister/configuration"
 
