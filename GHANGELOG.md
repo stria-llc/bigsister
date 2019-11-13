@@ -4,6 +4,10 @@ All notable changes to BigSister will be documented in this file.
 
 ## [Unreleased]
 
+## [0.2.3] - Nov 13, 2019
+### Added
+* Zoho Analytics reporter
+
 ## [0.2.2] - Nov 12, 2019
 ### Changed
 * Adjust timestamp format
@@ -29,9 +33,10 @@ All notable changes to BigSister will be documented in this file.
 * Basic Application object
 * CLI tool
 
-[Unreleased]: https://github.com/paulholden2/bigsister/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/paulholden2/bigsister/compare/0.2.3...HEAD
 [0.1.1]: https://github.com/paulholden2/bigsister/releases/tag/0.1.1
 [0.1.2]: https://github.com/paulholden2/bigsister/releases/tag/0.1.2
 [0.2.0]: https://github.com/paulholden2/bigsister/releases/tag/0.2.0
 [0.2.1]: https://github.com/paulholden2/bigsister/releases/tag/0.2.1
 [0.2.2]: https://github.com/paulholden2/bigsister/releases/tag/0.2.2
+[0.2.3]: https://github.com/paulholden2/bigsister/releases/tag/0.2.3
