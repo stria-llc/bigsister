@@ -1,11 +1,12 @@
 require "bigsister/monitors/local"
 require "bigsister/monitors/springcm"
 require "bigsister/reporters/csv_reporter"
+require "bigsister/reporters/zoho_analytics_reporter"
 
 module BigSister
   class Configuration
     MONITOR_TYPES = %w(local springcm).freeze
-    REPORTER_TYPES = %w(csv).freeze
+    REPORTER_TYPES = %w(csv zoho-analytics).freeze
 
     attr_reader :monitors, :reporters
 
@@ -65,6 +66,8 @@ module BigSister
     def load_reporter(type, reporter, i)
       if type == "csv"
         BigSister::CsvReporter.new(reporter, i)
+      elsif type == "zoho-analytics"
+        BigSister::ZohoAnalyticsReporter.new(reporter, i)
       end
     end
 

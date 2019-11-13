@@ -111,6 +111,14 @@ module BigSister
       DateTime.now.strftime("%FT%T%z")
     end
 
+    def rows
+      if summary?
+        summary
+      else
+        detail
+      end
+    end
+
     def detail
       rows = []
       rows += file_rows if log_files?
